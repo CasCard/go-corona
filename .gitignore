@@ -1,2 +1,2 @@
-# Project exclude paths
-/venv/
+import pygame
+print 6

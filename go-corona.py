@@ -1,1 +1,1 @@
-# welcome to go-corona game
+import pygame
