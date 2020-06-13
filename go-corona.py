@@ -144,12 +144,18 @@ def redrawGameWindow():
 
 man = player(300, 410, 64, 64)
 corona = enemy(100, 410, 64, 64,300)
+shootLoop=0
 bullets=[]
 run = True
 
 while run:
     clock.tick(27)
     pygame.time.delay(100)
+    if shootLoop>0:
+        shootLoop+=1
+
+    if shootLoop>3:
+        shootLoop=0
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -169,7 +175,7 @@ while run:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_SPACE]:
+    if keys[pygame.K_SPACE] and shootLoop==0:
         if man.left:
             facing=-1
         else:
@@ -177,6 +183,8 @@ while run:
 
         if len(bullets) < 5:
             bullets.append(projectile(round(man.x+man.width//2),round(man.y+man.width//2),6,(0,0,0),facing))
+
+        shootLoop = 1
 
     if keys[pygame.K_LEFT] and man.x > man.velocity:
         man.x -= man.velocity
