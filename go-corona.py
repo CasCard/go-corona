@@ -129,6 +129,9 @@ class enemy(object):
                 self.velocity = self.velocity * -1
                 self.walkCount = 0
 
+    def hit(self):
+        print('hit')
+
 
 def redrawGameWindow():
     win.blit(bg, (0, 0))
@@ -153,6 +156,11 @@ while run:
             run = False
 
     for bullet in bullets:
+        if bullet.y-bullet.radius<corona.hitbox[1]+corona.hitbox[3] and bullet.y+bullet.radius>corona.hitbox[1]:
+            if bullet.x+bullet.radius>corona.hitbox[0] and bullet.x-bullet.radius < corona.hitbox[0]+corona.hitbox[2]:
+                corona.hit()
+                bullets.pop(bullets.index(bullet))
+
         if bullet.x < 500 and bullet.x>0:
             bullet.x+=bullet.velocity
         else:
