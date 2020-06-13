@@ -2,9 +2,13 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
+=======
+    <content url="file://$MODULE_DIR$" />
+>>>>>>> ae94607d6af2f194fcb078007dbf9f5643a59c30
 =======
     <content url="file://$MODULE_DIR$" />
 >>>>>>> ae94607d6af2f194fcb078007dbf9f5643a59c30
