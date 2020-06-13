@@ -18,7 +18,7 @@ bg = pygame.image.load('assets/images/bg.png')
 char = pygame.image.load('assets/images/standing.png')
 
 clock = pygame.time.Clock()
-
+score=0
 
 class player(object):
     def __init__(self, x, y, width, height):
@@ -135,12 +135,15 @@ class enemy(object):
 
 def redrawGameWindow():
     win.blit(bg, (0, 0))
+    text=font.render('Score: '+str(score),1,(0,0,0))
+    win.blit(text,(390,10))
     man.draw(win)
     corona.draw(win)
     for bullet in bullets:
         bullet.draw(win)
     pygame.display.update()
 
+font = pygame.font.SysFont('comicsans',30,True)
 
 man = player(300, 410, 64, 64)
 corona = enemy(100, 410, 64, 64,300)
@@ -165,6 +168,8 @@ while run:
         if bullet.y-bullet.radius<corona.hitbox[1]+corona.hitbox[3] and bullet.y+bullet.radius>corona.hitbox[1]:
             if bullet.x+bullet.radius>corona.hitbox[0] and bullet.x-bullet.radius < corona.hitbox[0]+corona.hitbox[2]:
                 corona.hit()
+                score+=1
+
                 bullets.pop(bullets.index(bullet))
 
         if bullet.x < 500 and bullet.x>0:
