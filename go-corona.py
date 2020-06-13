@@ -115,7 +115,7 @@ class enemy(object):
             win.blit(self.walkLeft[self.walkCount//3],(self.x, self.y))
             self.walkCount+=1
         pygame.draw.rect(win,(255,0,0),(self.hitbox[0],self.hitbox[1]-20,50,10))
-        pygame.draw.rect(win, (0, 255, 0), (self.hitbox[0], self.hitbox[1] - 20, 50, 10))
+        pygame.draw.rect(win, (0, 128, 0), (self.hitbox[0], self.hitbox[1] - 20, 50-(5*(10-self.health)), 10))
         self.hitbox = (self.x + 17, self.y+2, 31, 57)
         # pygame.draw.rect(win, (255, 0, 0),self.hitbox, 2)
 
