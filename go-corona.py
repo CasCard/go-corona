@@ -1,18 +1,19 @@
-
 import pygame
 import random
 import os
+import time
 pygame.init()
 
 win=pygame.display.set_mode((500,500))
-
 pygame.display.set_caption("go-corona")
+BG_IMG=pygame.transform.scale2x(pygame.image.load(os.path.join("assets","bg.png")))
 
 x=50
 y=50
 width=30
 height=60
 velocity=5
+
 
 run=True
 while run:
