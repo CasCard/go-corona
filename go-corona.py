@@ -18,6 +18,10 @@ bg = pygame.image.load('assets/images/bg.png')
 char = pygame.image.load('assets/images/standing.png')
 
 clock = pygame.time.Clock()
+bulletSound=pygame.mixer.Sound('assets/audio/bullet.mp3')
+hitSound = pygame.mixer.Sound('assets/audio/hit.mp3')
+music=pygame.mixer.music.load('assets/audio/music.mp3')
+pygame.mixer.music.play(-1)
 score=0
 
 class player(object):
@@ -64,6 +68,23 @@ class player(object):
                 win.blit(walkRight[0],(self.x,self.y))
             else:
                 win.blit(walkRight[0],(self.x, self.y))
+
+    def hit(self):
+        self.x=60
+        self.y=410
+        self.walkCount=0
+        font1=pygame.font.SysFont('comicsans',100)
+        text=font1.render('-5',1,(255,0,0))
+        win.blit(text,(250-(text.get_width()/2),200))
+        pygame.display.update()
+        i=0
+        while i<300:
+            pygame.time.delay(10)
+            i+=1
+            for event in pygame.event.get():
+                if event.type==pygame.QUIT:
+                    i=301
+                    pygame.quit()
 
 
 
@@ -163,6 +184,12 @@ run = True
 while run:
     clock.tick(27)
     pygame.time.delay(100)
+    if man.hitbox[1]< corona.hitbox[1] + corona.hitbox[3] and man.hitbox[1] + man.hitbox[3] > corona.hitbox[1]:
+        if man.hitbox[0] + man.hitbox[2] > corona.hitbox[0] and man.hitbox[0] < corona.hitbox[0] + corona.hitbox[2]:
+            man.hit()
+            score -= 5
+            bullets.pop(bullets.index(bullet))
+
     if shootLoop>0:
         shootLoop+=1
 
@@ -176,6 +203,7 @@ while run:
     for bullet in bullets:
         if bullet.y-bullet.radius<corona.hitbox[1]+corona.hitbox[3] and bullet.y+bullet.radius>corona.hitbox[1]:
             if bullet.x+bullet.radius>corona.hitbox[0] and bullet.x-bullet.radius < corona.hitbox[0]+corona.hitbox[2]:
+                hitSound.play()
                 corona.hit()
                 score+=1
 
@@ -190,6 +218,7 @@ while run:
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_SPACE] and shootLoop==0:
+        bulletSound.play()
         if man.left:
             facing=-1
         else:
