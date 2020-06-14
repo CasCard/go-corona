@@ -8,7 +8,6 @@ pygame.init()
 win=pygame.display.set_mode((500,500))
 pygame.display.set_caption("go-corona")
 
-
 walkRight = [pygame.image.load('assets/images/R1.png'), pygame.image.load('assets/images/R2.png'), pygame.image.load('assets/images/R3.png'),
              pygame.image.load('assets/images/R4.png'), pygame.image.load('assets/images/R5.png'), pygame.image.load('assets/images/R6.png'),
              pygame.image.load('assets/images/R7.png'), pygame.image.load('assets/images/R8.png'), pygame.image.load('assets/images/R9.png')]
@@ -71,7 +70,9 @@ class player(object):
                 win.blit(walkRight[0],(self.x, self.y))
 
     def hit(self):
-        self.x=60
+        self.isJump=False
+        self.jumpCount=10
+        self.x=100
         self.y=410
         self.walkCount=0
         font1=pygame.font.SysFont('comicsans',100)
@@ -167,7 +168,7 @@ class enemy(object):
 def redrawGameWindow():
     win.blit(bg, (0, 0))
     text=font.render('Score: '+str(score),1,(0,0,0))
-    win.blit(text,(390,10))
+    win.blit(text,(350,10))
     man.draw(win)
     corona.draw(win)
     for bullet in bullets:
@@ -184,12 +185,12 @@ run = True
 
 while run:
     clock.tick(27)
-    pygame.time.delay(100)
-    if man.hitbox[1]< corona.hitbox[1] + corona.hitbox[3] and man.hitbox[1] + man.hitbox[3] > corona.hitbox[1]:
-        if man.hitbox[0] + man.hitbox[2] > corona.hitbox[0] and man.hitbox[0] < corona.hitbox[0] + corona.hitbox[2]:
-            man.hit()
-            score -= 5
-            bullets.pop(bullets.index(bullet))
+    if corona.visible==True:
+        if man.hitbox[1]< corona.hitbox[1] + corona.hitbox[3] and man.hitbox[1] + man.hitbox[3] > corona.hitbox[1]:
+            if man.hitbox[0] + man.hitbox[2] > corona.hitbox[0] and man.hitbox[0] < corona.hitbox[0] + corona.hitbox[2]:
+                man.hit()
+                score -= 5
+
 
     if shootLoop>0:
         shootLoop+=1
@@ -207,7 +208,6 @@ while run:
                 hitSound.play()
                 corona.hit()
                 score+=1
-
                 bullets.pop(bullets.index(bullet))
 
         if bullet.x < 500 and bullet.x>0:
