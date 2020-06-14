@@ -2,6 +2,7 @@ import pygame
 import random
 import os
 import time
+# pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
 win=pygame.display.set_mode((500,500))
@@ -18,9 +19,9 @@ bg = pygame.image.load('assets/images/bg.png')
 char = pygame.image.load('assets/images/standing.png')
 
 clock = pygame.time.Clock()
-bulletSound=pygame.mixer.Sound('assets/audio/bullet.mp3')
-hitSound = pygame.mixer.Sound('assets/audio/hit.mp3')
-music=pygame.mixer.music.load('assets/audio/music.mp3')
+bulletSound=pygame.mixer.Sound('assets/audio/bullet.ogg')
+hitSound = pygame.mixer.Sound('assets/audio/hit.ogg')
+music=pygame.mixer.music.load('assets/audio/music.ogg')
 pygame.mixer.music.play(-1)
 score=0
 
