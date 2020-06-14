@@ -23,6 +23,9 @@ walkLeft = [pygame.image.load('assets/images/L1.png'), pygame.image.load('assets
             pygame.image.load('assets/images/L9.png')]
 bg = pygame.image.load('assets/images/bg.png')
 char = pygame.image.load('assets/images/standing.png')
+banner=pygame.image.load('assets/images/break_the_chain.png')
+
+
 
 clock = pygame.time.Clock()
 bulletSound = pygame.mixer.Sound('assets/audio/bullet.ogg')
@@ -83,8 +86,8 @@ class player(object):
         self.x = 100
         self.y = 370
         self.walkCount = 0
-        font1 = pygame.font.SysFont('comicsans', 100)
-        text = font1.render('-5', 1, (255, 0, 0))
+        font1 = pygame.font.SysFont('comicsans', 50)
+        text = font1.render('Maintain Social distancing', 1, (255, 0, 0))
         win.blit(text, (400 - (text.get_width() / 2), 200))
         pygame.display.update()
         i = 0
@@ -180,6 +183,7 @@ class enemy(object):
 
 def redrawGameWindow():
     win.blit(bg, (0, 0))
+    win.blit(banner,(10,10))
     text = font.render('Score: ' + str(score), 1, (0, 0, 0))
     win.blit(text, (350, 10))
     man.draw(win)
