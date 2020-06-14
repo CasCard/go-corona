@@ -24,7 +24,7 @@ walkLeft = [pygame.image.load('assets/images/L1.png'), pygame.image.load('assets
 bg = pygame.image.load('assets/images/bg.png')
 char = pygame.image.load('assets/images/standing.png')
 banner=pygame.image.load('assets/images/break_the_chain.png')
-
+bulletImage=pygame.image.load('assets/images/bullet.png')
 
 
 clock = pygame.time.Clock()
@@ -101,16 +101,15 @@ class player(object):
 
 
 class projectile(object):
-    def __init__(self, x, y, radius, color, facing):
+    def __init__(self, x, y,radius,facing):
         self.x = x
         self.y = y
-        self.radius = radius
-        self.color = color
+        self.radius=radius
         self.facing = facing
         self.velocity = 8 * facing
 
-    def draw(self, win):
-        pygame.draw.circle(win, self.color, (self.x, self.y), self.radius)
+    def draw(self):
+        win.blit(bulletImage, (self.x, self.y))
 
 
 class enemy(object):
@@ -189,7 +188,7 @@ def redrawGameWindow():
     man.draw(win)
     corona.draw(win)
     for bullet in bullets:
-        bullet.draw(win)
+        bullet.draw()
     pygame.display.update()
 
 
@@ -246,7 +245,7 @@ while run:
 
         if len(bullets) < 5:
             bullets.append(
-                projectile(round(man.x + man.width // 2), round(man.y + man.width // 2), 6, (0, 0, 0), facing))
+                projectile(round(man.x + man.width // 2), round(man.y + man.width // 2),6, facing))
 
         shootLoop = 1
 
