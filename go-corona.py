@@ -5,8 +5,8 @@ import time
 # pygame.mixer.pre_init(44100, 16, 2, 4096)
 pygame.init()
 
-win=pygame.display.set_mode((500,500))
-pygame.display.set_caption("go-corona")
+win=pygame.display.set_mode((500,480))
+pygame.display.set_caption("Go-corona")
 
 walkRight = [pygame.image.load('assets/images/R1.png'), pygame.image.load('assets/images/R2.png'), pygame.image.load('assets/images/R3.png'),
              pygame.image.load('assets/images/R4.png'), pygame.image.load('assets/images/R5.png'), pygame.image.load('assets/images/R6.png'),
@@ -85,7 +85,7 @@ class player(object):
             i+=1
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
-                    i=301
+                    i=201
                     pygame.quit()
 
 
@@ -177,7 +177,7 @@ def redrawGameWindow():
 
 font = pygame.font.SysFont('comicsans',30,True)
 
-man = player(300, 410, 64, 64)
+man = player(200, 410, 64, 64)
 corona = enemy(100, 410, 64, 64,300)
 shootLoop=0
 bullets=[]
@@ -185,6 +185,7 @@ run = True
 
 while run:
     clock.tick(27)
+
     if corona.visible==True:
         if man.hitbox[1]< corona.hitbox[1] + corona.hitbox[3] and man.hitbox[1] + man.hitbox[3] > corona.hitbox[1]:
             if man.hitbox[0] + man.hitbox[2] > corona.hitbox[0] and man.hitbox[0] < corona.hitbox[0] + corona.hitbox[2]:
